@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mi Amor</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+            color: #333;
+            text-align: center;
+        }
+        header {
+            background: #ff6b6b;
+            color: white;
+            padding: 20px;
+            font-size: 28px;
+            border-bottom: 3px solid #fff;
+        }
+        section {
+            padding: 30px;
+        }
+        .message {
+            font-size: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            margin: 20px;
+            font-size: 18px;
+            background: #ff6b6b;
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .btn:hover {
+            background: #fa5252;
+        }
+        .game-container {
+            display: none;
+            margin: 30px;
+        }
+        canvas {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        💖 Para Mi Amor 💖
+    </header>
+    <section>
+        <div class="message">
+            <p>Mi amor, esta página está llena de sorpresas solo para ti. Cada parte de ella ha sido pensada con todo mi cariño, y espero que te haga sentir lo especial que eres para mí. 💕</p>
+            <p>Te amo más de lo que las palabras pueden expresar. Aquí va un pequeño juego, ¡pero hay más sorpresas dentro! 🌹</p>
+        </div>
+        <a class="btn" onclick="mostrarJuego()">Abrir mi sorpresa 🎁</a>
+    </section>
+    <div class="game-container">
+        <h3>🎮 Juego: Encuentra el corazón ❤️</h3>
+        <canvas id="gameCanvas" width="300" height="300"></canvas>
+        <div id="gameMessage"></div>
+    </div>
+    <script>
+        function mostrarJuego() {
+            document.querySelector('.game-container').style.display = 'block';
+        }
+
+        // Juego: Encuentra el corazón
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const heart = new Image();
+        heart.src = 'https://upload.wikimedia.org/wikipedia/commons/e/e4/Love_Heart_SVG.svg';
+
+        const heartPosition = {
+            x: Math.random() * (canvas.width - 50),
+            y: Math.random() * (canvas.height - 50),
+            size: 50
+        };
+
+        heart.onload = () => {
+            ctx.drawImage(heart, heartPosition.x, heartPosition.y, heartPosition.size, heartPosition.size);
+        };
+
+        canvas.addEventListener('click', (event) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            if (
+                x >= heartPosition.x &&
+                x <= heartPosition.x + heartPosition.size &&
+                y >= heartPosition.y &&
+                y <= heartPosition.y + heartPosition.size
+            ) {
+                document.getElementById('gameMessage').innerText = '¡Felicidades, encontraste el corazón! ❤️ Te amo mucho. 💖';
+            } else {
+                document.getElementById('gameMessage').innerText = '¡Sigue buscando! 💌. Recuerda que mi amor por ti no tiene fin.';
+            }
+        });
+    </script>
+</body>
+</html>
